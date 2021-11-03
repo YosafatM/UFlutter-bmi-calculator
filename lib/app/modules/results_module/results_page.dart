@@ -1,13 +1,13 @@
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/app/core/theme/text_theme.dart';
+import 'package:bmi_calculator/app/core/values/colors.dart';
+import 'package:bmi_calculator/app/modules/bmi_controller.dart';
+import 'package:bmi_calculator/app/global_widgets/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'constants.dart';
+import 'package:get/get.dart';
 
 class ResultsPage extends StatelessWidget {
-  final String type, bmi, tip;
-
-  ResultsPage({this.type, this.bmi, this.tip});
+  final BMIController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +26,27 @@ class ResultsPage extends StatelessWidget {
           ),
           Expanded(
             child: ReusableCard(
-              color: kActiveCardColor,
+              color: kInactiveCardColor,
+              onTap: () {},
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Text(
-                    type,
+                    controller.getType(),
                     style: TextStyle(
                       color: Colors.green,
                       fontSize: 23,
                     ),
                   ),
                   Text(
-                    bmi,
+                    controller.getBmi(),
                     style: TextStyle(
                       fontSize: 80,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   Text(
-                    tip,
+                    controller.getTip(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -56,9 +57,7 @@ class ResultsPage extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: () => Get.back(),
             child: Container(
               height: 80.0,
               width: double.infinity,

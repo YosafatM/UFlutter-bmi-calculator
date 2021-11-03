@@ -1,13 +1,27 @@
 import 'dart:math';
 
-class CalculatorBrain {
-  int height, weight;
-  double _bmi;
+import 'package:get/get.dart';
 
-  CalculatorBrain(this.height, this.weight);
+enum Gender {
+  male,
+  female
+}
+
+class BMIController extends GetxController {
+  Rx<Gender> _gender = Gender.male.obs;
+  Rx<int> height = 180.obs;
+  Rx<int> weight = 70.obs;
+  Rx<int> age = 18.obs;
+  double _bmi = 0;
+
+  set gender(int value){
+    _gender.value = value == 0 ? Gender.male : Gender.female;
+  }
+
+  get isMale => _gender.value == Gender.male;
 
   String getBmi() {
-    _bmi = weight / pow(height / 100, 2);
+    _bmi = weight.value / pow(height.value / 100, 2);
     return _bmi.toStringAsFixed(1);
   }
 
@@ -21,7 +35,7 @@ class CalculatorBrain {
     }
   }
 
-  String getName() {
+  String getType() {
     if (_bmi > 25) {
       return 'Overweight';
     } else if (_bmi > 18.5) {

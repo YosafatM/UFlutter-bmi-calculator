@@ -1,11 +1,14 @@
-import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/app/core/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class GenderIcon extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  GenderIcon({@required this.icon, @required this.text});
+  GenderIcon({
+    required this.icon,
+    required this.text
+  });
 
   @override
   Widget build(BuildContext context) {
